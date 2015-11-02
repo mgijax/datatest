@@ -23,6 +23,28 @@ class DerivedMarkerMPTestCase(unittest.TestCase, DataTestCase):
 	
 	cacheLoads = ["rollupload"]
 
+	def testDerivedCreationDate(self):
+		"""
+		Test that no source MP annotations are newer
+			than the latest Derived MP annotations
+		"""
+
+		derivedDateQuery = """select creation_date 
+			from voc_annot va
+			where va._annottype_key = %d
+			limit 1
+		""" % MP_MARKER_DERIVED_TYPE_KEY
+		derivedCreationDate = runQuery(derivedDateQuery)[0]['creation_date']
+		
+		sourceAnnotDateQuery = """select max(modification_date) as modification_date
+			from voc_annot va
+			where va._annottype_key = %d
+		""" % MP_GENO_TYPE_KEY
+		sourceModificationDate = runQuery(sourceAnnotDateQuery)[0]['modification_date']
+
+		failMsg = "Derived MP annotations older than the latest source MP annotations"
+		self.assertDataTrue(derivedCreationDate >= sourceModificationDate, failMsg)
+
 	def testMarkerCreationDate(self):
 		"""
 		Test that no MP-annotated markers are newer
@@ -46,12 +68,35 @@ class DerivedMarkerMPTestCase(unittest.TestCase, DataTestCase):
 		""" % MP_GENO_TYPE_KEY
 		markerCreationDate = runQuery(newMarkerDateQuery)[0]['creation_date']
 
-		self.assertDataTrue(derivedCreationDate >= markerCreationDate, "Derived MP annotations older than latest marker with MP annotations")
+		failMsg = "Derived MP annotations older than latest marker with MP annotations"
+		self.assertDataTrue(derivedCreationDate >= markerCreationDate, failMsg)
 
 
 class DerivedMarkerOMIMTestCase(unittest.TestCase, DataTestCase):
 	
 	cacheLoads = ["rollupload"]
+
+	def testDerivedCreationDate(self):
+		"""
+		Test that no source OMIM annotations are newer
+			than the latest Derived OMIM annotations
+		"""
+
+		derivedDateQuery = """select creation_date 
+			from voc_annot va
+			where va._annottype_key = %d
+			limit 1
+		""" % OMIM_MARKER_DERIVED_TYPE_KEY
+		derivedCreationDate = runQuery(derivedDateQuery)[0]['creation_date']
+		
+		sourceAnnotDateQuery = """select max(modification_date) as modification_date
+			from voc_annot va
+			where va._annottype_key = %d
+		""" % OMIM_GENO_TYPE_KEY
+		sourceModificationDate = runQuery(sourceAnnotDateQuery)[0]['modification_date']
+
+		failMsg = "Derived OMIM annotations older than the latest source OMIM annotations"
+		self.assertDataTrue(derivedCreationDate >= sourceModificationDate, failMsg)
 
 	def testMarkerCreationDate(self):
 		"""
@@ -76,7 +121,8 @@ class DerivedMarkerOMIMTestCase(unittest.TestCase, DataTestCase):
 		""" % OMIM_GENO_TYPE_KEY
 		markerCreationDate = runQuery(newMarkerDateQuery)[0]['creation_date']
 
-		self.assertDataTrue(derivedCreationDate >= markerCreationDate, "Derived OMIM annotations older than latest marker with OMIM annotations")
+		failMsg = "Derived OMIM annotations older than latest marker with OMIM annotations"
+		self.assertDataTrue(derivedCreationDate >= markerCreationDate, failMsg)
 
 def suite():
 	suite = unittest.TestSuite()
