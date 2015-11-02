@@ -28,8 +28,7 @@ A proper test case file should look like this:
     
     def suite():
         suite = unittest.TestSuite()
-        suite.addTest(unittest.makeSuite(DerivedMarkerMPTestCase))
-        suite.addTest(unittest.makeSuite(DerivedMarkerOMIMTestCase))
+        suite.addTest(unittest.makeSuite(NewTestCase))
         return suite
     
     
