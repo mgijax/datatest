@@ -55,3 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# MGI_Install
+Configuration
