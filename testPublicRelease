@@ -1,9 +1,15 @@
 #!/bin/sh
-set -e
+set -o pipefail
+
+cd `dirname $0`
 
 source Configuration
 
-./testPublicRelease.py
+LOG=${DATATEST_LOGDIR}/testPublicRelease.log
+rm -f ${LOG}
+
+date | tee -a ${LOG}
+./testPublicRelease.py 2>&1 | tee -a ${LOG} || exit 1;
 
 
 echo "All tests succeeded"

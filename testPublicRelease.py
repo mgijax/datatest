@@ -12,7 +12,6 @@ import unittest
 
 from tests import *
 
-
 def master_suite():
 	"""
 	Define which tests to run in order to test that

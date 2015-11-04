@@ -1,13 +1,15 @@
 """
 datatest classes
 """
+import logging
+import os
+
 import db
 
 ### Globals ###
 # Track test failures
 FAILURES = []
 CACHELOADS = set([])
-
 
 ### Classes ###
 
@@ -72,9 +74,8 @@ def runQuery(query):
 	return db.sql(query, 'auto')
 
 
-def log(msg, level=None):
+def log(msg):
 	print msg
-
 
 def reportFailures():
 	"""
