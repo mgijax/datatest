@@ -50,7 +50,7 @@ Next you need to update the following files:
         "new_module_test",
     ...]
 
-    testPublicRelease --->
+    testPublicRelease.py --->
     #Add to master_suite
     def master_suite():
         ...
