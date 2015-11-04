@@ -11,6 +11,12 @@ import db
 FAILURES = []
 CACHELOADS = set([])
 
+### initialize database settings ###
+db.set_sqlUser('mgd_public')
+db.set_sqlPassword('mgdpub')
+db.set_sqlServer( os.environ['DATATEST_DBSERVER'] )
+db.set_sqlDatabase( os.environ['DATATEST_DBNAME'] )
+
 ### Classes ###
 
 class DataTestCase(object):

@@ -2,3 +2,19 @@
 ### Configuration for datatest product ###
 DATATEST_LOGDIR=logs
 export DATATEST_LOGDIR
+
+
+# default values from mgiconfig
+if [ ${MGD_DBSERVER} ]
+then
+    DATATEST_DBSERVER=$MGD_DBSERVER
+    DATATEST_DBNAME=$MGD_DBNAME
+else
+    echo "Cannot set DATATEST_DBSERVER. MGD_DBSERVER variable not set"
+    exit 1;
+fi
+# (Optional) Override MGICONFIG
+#DATATEST_DBSERVER=localhost
+#DATATEST_DBNAME=prod
+
+export DATATEST_DBSERVER DATATEST_DBNAME
