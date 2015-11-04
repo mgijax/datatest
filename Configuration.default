@@ -1,2 +1,4 @@
 #!/bin/sh
 ### Configuration for datatest product ###
+DATATEST_LOGDIR=logs
+export DATATEST_LOGDIR
