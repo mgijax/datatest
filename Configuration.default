@@ -3,6 +3,12 @@
 DATATEST_LOGDIR=logs
 export DATATEST_LOGDIR
 
+if [ ! $MGI_CONFIG ]
+then
+   MGI_CONFIG=/usr/local/mgi/live/mgiconfig
+fi
+
+. $MGI_CONFIG/master.config.sh
 
 # default values from mgiconfig
 if [ ${MGD_DBSERVER} ]
