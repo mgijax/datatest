@@ -1,14 +1,17 @@
 #!/bin/sh
-### Configuration for datatest product ###
-DATATEST_LOGDIR=logs
-export DATATEST_LOGDIR
 
-if [ ! $MGI_CONFIG ]
+if [ ! $MGICONFIG ]
 then
-   MGI_CONFIG=/usr/local/mgi/live/mgiconfig
+   MGICONFIG=/usr/local/mgi/live/mgiconfig
 fi
 
-. $MGI_CONFIG/master.config.sh
+. $MGICONFIG/master.config.sh
+
+
+### Configuration for datatest product ###
+
+DATATEST_LOGDIR=logs
+export DATATEST_LOGDIR
 
 # default values from mgiconfig
 if [ ${MGD_DBSERVER} ]
