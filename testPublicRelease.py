@@ -21,8 +21,8 @@ def master_suite():
 
 	suites.append(derived_marker_annotations_test.suite())
 
-	#suites.append(go_annot_extension_links_test.suite())
-	#suites.append(go_isoform_links_test.suite())
+	suites.append(go_annot_extension_links_test.suite())
+	suites.append(go_isoform_links_test.suite())
 
 	master_suite = unittest.TestSuite(suites)
 
