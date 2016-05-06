@@ -3,9 +3,9 @@
 if [ ! $MGICONFIG ]
 then
    MGICONFIG=/usr/local/mgi/live/mgiconfig
+   . $MGICONFIG/master.config.sh
 fi
 
-. $MGICONFIG/master.config.sh
 
 
 ### Configuration for datatest product ###
