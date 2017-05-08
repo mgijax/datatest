@@ -3,7 +3,13 @@ set -o pipefail
 
 cd `dirname $0`
 
-source Configuration
+if [ $# -ge 2 ]; then
+	source Configuration $1 $2
+else
+	source Configuration
+fi
+
+export DATATEST_DBSERVER DATATEST_DBNAME PYTHONPATH
 
 LOG=${DATATEST_LOGDIR}/testPublicRelease.log
 rm -f ${LOG}
