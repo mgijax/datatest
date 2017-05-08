@@ -4,7 +4,11 @@ datatest classes
 import logging
 import os
 
-import db
+if 'PYTHONPATH' in os.environ:
+	import sys
+	sys.path.insert(0, os.environ['PYTHONPATH'])
+
+import pg_db
 
 ### Globals ###
 # Track test failures
@@ -12,10 +16,10 @@ FAILURES = []
 CACHELOADS = set([])
 
 ### initialize database settings ###
-db.set_sqlUser('mgd_public')
-db.set_sqlPassword('mgdpub')
-db.set_sqlServer( os.environ['DATATEST_DBSERVER'] )
-db.set_sqlDatabase( os.environ['DATATEST_DBNAME'] )
+pg_db.set_sqlUser('mgd_public')
+pg_db.set_sqlPassword('mgdpub')
+pg_db.set_sqlServer( os.environ['DATATEST_DBSERVER'] )
+pg_db.set_sqlDatabase( os.environ['DATATEST_DBNAME'] )
 
 ### Classes ###
 
@@ -77,7 +81,7 @@ class DataTestCase(object):
 ### methods ###
 
 def runQuery(query):
-	return db.sql(query, 'auto')
+	return pg_db.sql(query, 'auto')
 
 
 def log(msg):
@@ -87,6 +91,7 @@ def reportFailures():
 	"""
 	Report any test failures
 	"""
+	log('Tested %s..%s' % (os.environ['DATATEST_DBSERVER'], os.environ['DATATEST_DBNAME'] ))
 	if CACHELOADS:
 
 		msg = """The following cache loads may need to be rerun:\n"""
