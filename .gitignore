@@ -58,3 +58,6 @@ target/
 
 # MGI_Install
 Configuration
+
+# vim temp files
+*~
