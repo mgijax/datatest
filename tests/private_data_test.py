@@ -107,6 +107,5 @@ def suite():
 
 ###--- Main Program ---###
 
-# tests can be executed as individual files, not just run through testPublic
 if __name__ == '__main__':
 	unittest.main()
