@@ -25,6 +25,8 @@ def master_suite():
 	suites.append(go_isoform_links_test.suite())
 	suites.append(allele_combination_test.suite())
 	suites.append(all_cre_cache_test.suite())
+	suites.append(annotheader_test.suite())
+	suites.append(private_data_test.suite())
 
 	master_suite = unittest.TestSuite(suites)
 

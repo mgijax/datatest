@@ -14,6 +14,7 @@ import pg_db
 # Track test failures
 FAILURES = []
 CACHELOADS = set([])
+OTHERFIXES = set([])
 
 ### initialize database settings ###
 pg_db.set_sqlUser('mgd_public')
@@ -36,8 +37,8 @@ class DataTestCase(object):
 		# Ensure that subclass has implemented the cacheLoads attribute
 		#	for tracking which cacheLoads the tested data is dependent on
 
-		if not hasattr('cacheLoads', self):
-			errMsg = self.__class__ + " does not implement 'cacheLoads' attribute"
+		if (not hasattr(self, 'cacheLoads')) and (not hasattr(self, 'otherFixes')):
+			errMsg = self.__class__ + " does not implement 'cacheLoads' or 'otherFixes' attribute"
 			raise NotImplementedError(errMsg)
 
 
@@ -75,7 +76,10 @@ class DataTestCase(object):
 		
 	def _recordAssertionFailure(self):
 		global CACHELOADS
-		CACHELOADS.update(self.cacheLoads)
+		if hasattr(self, 'cacheLoads'):
+			CACHELOADS.update(self.cacheLoads)
+		if hasattr(self, 'otherFixes'):
+			OTHERFIXES.update(self.otherFixes)
 
 
 ### methods ###
@@ -102,3 +106,14 @@ def reportFailures():
 			msg += "\t" + cacheload + "\n"
 
 		log(msg)
+
+	if OTHERFIXES:
+
+		msg2 = """The following other fixes may be necessary:\n"""
+
+		otherfixes = list(OTHERFIXES)
+		otherfixes.sort()
+		for otherfix in otherfixes:
+			msg2 += "\t" + otherfix + "\n"
+
+		log(msg2)

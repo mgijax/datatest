@@ -46,10 +46,11 @@ class GOAnnotExtensionLinksTestCase(unittest.TestCase, DataTestCase):
 			where mn._object_key = vep._evidenceproperty_key
 			and mn._notetype_key = %d
 		)
+		limit 1
 		""" % (self.evidenceKeyClause, self.propertyKeyClause,
 			GO_ANNOT_EXT_DISPLAY_NOTETYPE_KEY)
 
-		self.assertQueryCount(0, query)
+		self.assertQueryCount(0, query, 'Some GO annotations missing display link note')
 
 def suite():
 	suite = unittest.TestSuite()
