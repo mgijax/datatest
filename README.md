@@ -5,8 +5,14 @@ Obvious corrections are reported at the end of a failed test run (e.g. which cac
 ## Test Public Release
 
 Run
+
     ./testPublicRelease
-to ensure that MGD is ready for public release.
+
+to ensure that MGD is ready for public release.  With no command-line parameters, this will look at MGICONFIG to find the server ($MGD_DBSERVER) and database ($MGD_DBNAME) to test.
+
+For convenience you can also specify the server and database on the command-line and bypass MGICONFIG's settings, as in:
+
+    ./testPublicRelease myservername mydatabasename
 
 # Test Writing Guide
 All tests go in the **tests** directory (e.g. tests/new\_module\_test.py).
