@@ -13,7 +13,7 @@ All tests go in the **tests** directory (e.g. tests/new\_module\_test.py).
 
 The easiest way to build a test is to copy the tests/template\_test.py file and customize it.
 
-Note that there are provided **assert** methods in the DataTestCase class. Use these in your tests so we can catch failures and report which _cacheLoads_ need to be re-run and which other fixes are suggested.
+Note that there are provided **assert** methods in the DataTestCase class. Use these in your tests so we can catch failures and report which _cacheLoads_ need to be re-run and which _otherFixes_ are suggested.
 
     E.g.
     self.assertQueryCount(expectedCount, query)
