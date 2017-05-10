@@ -11,31 +11,9 @@ to ensure that MGD is ready for public release.
 # Test Writing Guide
 All tests go in the **tests** directory (e.g. tests/new\_module\_test.py).
 
-A proper test case file should look like this: 
+The easiest way to build a test is to copy the tests/template\_test.py file and customize it.
 
-    import unittest
-    from datatest import DataTestCase
-    
-    class NewTestCase(unittest.TestCase, DataTestCase):
-    
-       cacheLoads = ['newcacheload']
-    
-       def newSQLTest(self):
-          """What the test does"""
-          
-          query = "select ... from ... where not exists (...)"
-          self.assertQueryCount(0, query) 
-    
-    def suite():
-        suite = unittest.TestSuite()
-        suite.addTest(unittest.makeSuite(NewTestCase))
-        return suite
-    
-    
-    if __name__ == '__main__':
-        unittest.main()
-        
-Note that there are provided **assert** methods in the DataTestCase class. Use these in your tests so we can catch failures and report which _cacheLoads_ need to be re-run.
+Note that there are provided **assert** methods in the DataTestCase class. Use these in your tests so we can catch failures and report which _cacheLoads_ need to be re-run and which other fixes are suggested.
 
     E.g.
     self.assertQueryCount(expectedCount, query)
@@ -45,8 +23,8 @@ Note that there are provided **assert** methods in the DataTestCase class. Use t
 Next you need to update the following files:
 
     tests/__init__.py --->
-    #Add module to __add__ list
-    __add__ = [...
+    #Add module to __all__ list
+    __all__ = [...
         "new_module_test",
     ...]
 
